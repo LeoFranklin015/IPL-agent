@@ -1,0 +1,19 @@
+{
+  "aeb65c00-9359-4bc0-827a-9d0365364d1b": {
+    "id": "aeb65c00-9359-4bc0-827a-9d0365364d1b",
+    "name": "Kolkata Knight Riders vs Rajasthan Royals, 53rd Match",
+    "tweetID": "1919044655876055459",
+    "betting_address": "0x6f8704a24f092c57d365057c5d0a02a4ac8352ee",
+    "completed": false,
+     "total_bet": 0.01,
+    "bets": [
+      {
+        "better_tweet_name": "radish57074",
+        "better_address": "0x4b4b30e2E7c6463b03CdFFD6c42329D357205334",
+        "bet_amount": 0.01,
+        "team_name": "Kolkata Knight riders",
+        "is_verified": true
+      }
+    ]
+  }
+}
