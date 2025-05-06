@@ -2,6 +2,7 @@ import { StructuredTool } from "@langchain/core/tools";
 import { z } from "zod";
 import * as fs from "fs";
 import * as path from "path";
+import { matchList } from "./matchData";
 
 interface Bet {
   better_tweet_name: string;
@@ -28,7 +29,7 @@ export class BetProcessingTool extends StructuredTool {
     address: z.string(),
     amount: z.number(),
     mentionerName: z.string(),
-  });
+  }) as any;
 
   private readonly storagePath: string;
 

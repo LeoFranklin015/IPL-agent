@@ -9,7 +9,7 @@ export class TwitterMatchTool extends StructuredTool {
   name = "twitter_match_tool";
   description =
     "A tool for posting match predictions on Twitter and managing match betting data";
-  schema = z.object({});
+  schema = z.object({}) as any;
   private client: TwitterApi;
 
   constructor(client: TwitterApi) {

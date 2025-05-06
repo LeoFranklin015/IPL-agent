@@ -10,7 +10,7 @@ export class TwitterMentionTool extends StructuredTool {
     action: z.enum(["process", "reply"]),
     tweetId: z.string().optional().nullable(),
     replyText: z.string().optional().nullable(),
-  });
+  }) as any;
 
   private client: TwitterApi;
   private lastProcessedTimestamp: number;

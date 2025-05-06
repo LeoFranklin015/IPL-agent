@@ -53,7 +53,7 @@ interface DistributionResult {
 export class BetDistributionTool extends StructuredTool {
   name = "bet_distribution_tool";
   description = "Distributes winnings to betters after match completion";
-  schema = z.object({});
+  schema = z.object({}) as any;
 
   private readonly storagePath: string;
   private readonly platformFee: number = 0.001; // 1% platform fee
@@ -138,15 +138,15 @@ export class BetDistributionTool extends StructuredTool {
         console.log(`Checking match: ${match.name}`);
         const matchResult = await this.getMatchResult(match.id);
 
-        // if (!matchResult) {
-        //   console.log(`Could not fetch result for match: ${match.name}`);
-        //   continue;
-        // }
+        if (!matchResult) {
+          console.log(`Could not fetch result for match: ${match.name}`);
+          continue;
+        }
 
-        // if (!matchResult.matchEnded) {
-        //   console.log(`Match ${match.name} has not ended yet`);
-        //   continue;
-        // }
+        if (!matchResult.matchEnded) {
+          console.log(`Match ${match.name} has not ended yet`);
+          continue;
+        }
 
         // Calculate winnings
         const winnings = this.calculateWinnings(match, "Mumbai Indians");
@@ -160,7 +160,7 @@ export class BetDistributionTool extends StructuredTool {
           const { address } = await generateAddress({
             publicKey:
               "secp256k1:4NfTiv3UsGahebgTaHyD9vF8KYKMBnfd6kh94mK6xv8fGBiJB8TBtFMP5WWXz6B89Ac1fbpzPwAvoyQebemHFwx3",
-            accountId: "cultured-owner.testnet",
+            accountId: "shade.swanky-chess.testnet",
             path: match.id,
             chain: "evm",
           });

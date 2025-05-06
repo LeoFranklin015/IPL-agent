@@ -29,7 +29,7 @@ export class MatchStorageTool extends StructuredTool {
     matchName: z.string(),
     tweetId: z.string(),
     bettingAddress: z.string(),
-  });
+  }) as any;
 
   private readonly storagePath: string;
 

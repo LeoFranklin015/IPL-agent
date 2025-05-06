@@ -6,7 +6,7 @@ import { generateAddress } from "@neardefi/shade-agent-js";
 export class MatchContentTool extends StructuredTool {
   name = "match_content_tool";
   description = "Finds the next match and generates tweet content for it";
-  schema = z.object({});
+  schema = z.object({}) as any; // Type assertion to avoid TypeScript error
 
   private getNextMatch() {
     const today = new Date().toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD format

@@ -24,7 +24,7 @@ export default async function handler(
 
     const stream = await agent.stream(
       { messages: [new HumanMessage(prompt)] },
-      config
+      { configurable: { thread_id: config.configurable.thread_id } }
     );
 
     let response = "";

@@ -63,7 +63,7 @@ export async function initialize() {
     appKey: process.env.TWITTER_API_KEY || "",
     appSecret: process.env.TWITTER_API_SECRET || "",
     accessToken: process.env.TWITTER_ACCESS_TOKEN || "",
-    accessSecret: process.env.TWITTER_ACCESS_SECRET || "",
+    accessSecret: process.env.TWITTER_ACCESS_TOKEN_SECRET || "",
   });
 
   // Create tools

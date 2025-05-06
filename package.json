@@ -7,19 +7,19 @@
         "build": "next build",
         "tappd:run": "sudo docker run --rm -p 8090:8090 phalanetwork/tappd-simulator:latest",
         "port:kill": "sudo fuser -k 3000/tcp",
-        "docker:build": "sudo docker build --no-cache --target dev -t my-nextjs-app:latest .",
-        "docker:run": "sudo docker run --rm -p 3000:3000 my-nextjs-app:latest",
-        "docker:image": "sudo docker build --no-cache --target prod -t mattdlockyer/shade-agent-basednames:latest .",
-        "docker:push": "sudo docker push mattdlockyer/shade-agent-basednames",
+        "docker:build": "sudo docker build --no-cache --target dev -t leofranklin00/shade-agent-ipl:latest .",
+        "docker:run": "sudo docker run --rm -p 3000:3000 leofranklin00/shade-agent-ipl:latest",
+        "docker:image": "sudo docker build --no-cache --target prod -t leofranklin00/shade-agent-ipl:latest .",
+        "docker:push": "sudo docker push leofranklin00/shade-agent-ipl",
         "docker:prune": "sudo docker system prune",
         "docker:restart": "sudo systemctl restart docker"
     },
     "dependencies": {
         "@coinbase/cdp-agentkit-core": "^0.0.10",
         "@coinbase/twitter-langchain": "^0.0.8",
-        "@langchain/core": "0.3.21",
-        "@langchain/langgraph": "^0.2.22",
-        "@langchain/openai": "^0.3.14",
+        "@langchain/core": "^0.3.40",
+        "@langchain/langgraph": "^0.2.67",
+        "@langchain/openai": "^0.3.17",
         "@neardefi/shade-agent-js": "^0.0.12",
         "@phala/dcap-qvl-web": "^0.1.0-beta.2",
         "@phala/dstack-sdk": "^0.1.7",
@@ -43,7 +43,7 @@
         "react-dom": "^18.2.0",
         "twitter-api-v2": "^1.22.0",
         "viem": "^2.28.1",
-        "zod": "^3.24.3"
+        "zod": "3.24.3"
     },
     "devDependencies": {
         "@types/react": "19.1.2",
@@ -51,6 +51,3 @@
         "typescript": "5.8.3"
     }
 }
-
-
-
