@@ -1,0 +1,42 @@
+# Scratchpad
+
+## Current Task: Integrate Search Functionality into IPL API
+
+### Task Description
+
+Integrate the search functionality from search.js into ipl.js, adding a new endpoint that allows searching and replying to tweets.
+
+### Plan
+
+[X] 1. Add search-related imports and constants from search.js
+[X] 2. Add search endpoint handling in ipl.js
+[X] 3. Add dummy reply processing function
+[X] 4. Add refresh token flow
+[ ] 5. Test the integration
+
+### Progress
+
+- Successfully integrated search functionality from search.js
+- Added Twitter client initialization
+- Added search endpoint handling with rate limiting
+- Added dummy reply processing function
+- Added refresh token flow with automatic token refresh on 401 errors
+- Fixed variable naming conflicts (client -> twitterClient and viemClient)
+- Next step: Testing the integration
+
+### Implementation Details
+
+1. Added new endpoint: `api/ipl?call=search`
+2. Search functionality:
+   - Searches for tweets containing "IPL"
+   - Handles rate limiting
+   - Processes new tweets and adds them to pending replies
+3. Reply processing:
+   - Dummy implementation that sends a generic response
+   - Handles retries (max 3 attempts)
+   - Processes replies in a continuous loop
+4. Token management:
+   - Added access token and refresh token storage
+   - Implemented automatic token refresh on 401 errors
+   - Added token validation on client initialization
+   - Added retry mechanism with refreshed token

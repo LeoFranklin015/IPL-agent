@@ -1,0 +1,19 @@
+{
+  "a97077e7-466a-46e8-b6e7-2b74731b1d42": {
+    "id": "a97077e7-466a-46e8-b6e7-2b74731b1d42",
+    "name": "Mumbai Indians vs Gujarat Titans, 56th Match",
+    "tweetID": "1919654677781848097",
+    "betting_address": "0x066272ddb391b25c0db626b70ca2e74f7434bc22",
+    "completed": false,
+    "total_bet": 0.01,
+    "bets": [
+      {
+        "better_tweet_name": "@radish57074",
+        "better_address": "0x4b4b30e2E7c6463b03CdFFD6c42329D357205334",
+        "bet_amount": 0.01,
+        "team_name": "Mumbai Indians",
+        "is_verified": true
+      }
+    ]
+  }
+}

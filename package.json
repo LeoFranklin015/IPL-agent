@@ -15,6 +15,11 @@
         "docker:restart": "sudo systemctl restart docker"
     },
     "dependencies": {
+        "@coinbase/cdp-agentkit-core": "^0.0.10",
+        "@coinbase/twitter-langchain": "^0.0.8",
+        "@langchain/core": "0.3.21",
+        "@langchain/langgraph": "^0.2.22",
+        "@langchain/openai": "^0.3.14",
         "@neardefi/shade-agent-js": "^0.0.12",
         "@phala/dcap-qvl-web": "^0.1.0-beta.2",
         "@phala/dstack-sdk": "^0.1.7",
@@ -28,6 +33,7 @@
         "hash.js": "^1.1.7",
         "js-sha3": "^0.9.3",
         "keccak": "^3.0.4",
+        "langchain": "^0.3.24",
         "natural": "^8.0.1",
         "near-api-js": "^5.0.1",
         "near-seed-phrase": "^0.2.1",
@@ -35,9 +41,16 @@
         "next-auth": "^4.24.11",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
-        "twitter-api-v2": "^1.22.0"
+        "twitter-api-v2": "^1.22.0",
+        "viem": "^2.28.1",
+        "zod": "^3.24.3"
     },
     "devDependencies": {
-        "ava": "^6.1.3"
+        "@types/react": "19.1.2",
+        "ava": "^6.1.3",
+        "typescript": "5.8.3"
     }
 }
+
+
+
