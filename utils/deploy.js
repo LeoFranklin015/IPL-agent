@@ -7,14 +7,11 @@ const { Near, Account, KeyPair, keyStores } = nearAPI;
 
 const networkId = "testnet";
 const accountId = process.env.NEAR_ACCOUNT_ID;
-const contractId = process.env.NEAR_ACCOUNT_ID;
+const contractId = process.env.NEAR_CONTRACT_ID;
 
-// Create a key store and add the key pair
+const { secretKey } = parseSeedPhrase(process.env.NEAR_SEED_PHRASE);
 const keyStore = new keyStores.InMemoryKeyStore();
-const privateKey = process.env.NEAR_PRIVATE_KEY;
-const keyPair = KeyPair.fromString(privateKey);
-
-// Add the key pair to the key store for both accounts
+const keyPair = KeyPair.fromString(secretKey);
 keyStore.setKey(networkId, accountId, keyPair);
 keyStore.setKey(networkId, contractId, keyPair);
 
@@ -25,7 +22,6 @@ const config = {
   walletUrl: "https://mynearwallet.com/",
   explorerUrl: "https://nearblocks.io",
 };
-
 const near = new Near(config);
 const { connection } = near;
 const gas = BigInt("300000000000000");
@@ -35,50 +31,63 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 const deploy = async () => {
   try {
-    // First check if the account exists
-    const account = getAccount(accountId);
-    try {
-      await account.state();
-      console.log("Account exists, proceeding with deployment");
-    } catch (e) {
-      console.log(
-        "Account does not exist. Please create it first using the NEAR wallet."
-      );
-      console.log("Visit: https://wallet.testnet.near.org/");
-      console.log("Create an account named:", accountId);
-      console.log("Then fund it with some NEAR tokens");
-      return;
-    }
-
-    await sleep(1000);
-
-    // Deploy the contract
-    const file = fs.readFileSync("./contract/target/near/contract.wasm");
-    const contractAccount = getAccount(contractId);
-    await contractAccount.deployContract(file);
-    console.log("Contract deployed successfully");
-    console.log("Deployed bytes:", file.byteLength);
-
-    const balance = await contractAccount.getAccountBalance();
-    console.log("Contract balance:", balance);
-
-    await sleep(1000);
-
-    // Initialize the contract
-    const initRes = await contractAccount.functionCall({
-      contractId,
-      methodName: "init",
-      args: {
-        owner_id: accountId,
-      },
-      gas,
-    });
-
-    console.log("Contract initialized:", initRes);
+    const account = getAccount(contractId);
+    await account.deleteAccount(accountId);
   } catch (e) {
-    console.error("Deployment failed:", e);
-    throw e;
+    console.log("error deleteAccount", e);
   }
+
+  await sleep(1000);
+
+  try {
+    const account = getAccount(accountId);
+    await account.createAccount(
+      contractId,
+      keyPair.getPublicKey(),
+      nearAPI.utils.format.parseNearAmount("10")
+    );
+  } catch (e) {
+    console.log("error createAccount", e);
+  }
+
+  await sleep(1000);
+
+  const file = fs.readFileSync("./contract/target/near/contract.wasm");
+  let account = getAccount(contractId);
+  await account.deployContract(file);
+  console.log("deployed bytes", file.byteLength);
+  const balance = await account.getAccountBalance();
+  console.log("contract balance", balance);
+
+  await sleep(1000);
+
+  const initRes = await account.functionCall({
+    contractId,
+    methodName: "init",
+    args: {
+      owner_id: accountId,
+    },
+    gas,
+  });
+
+  console.log("initRes", initRes);
+
+  await sleep(1000);
+
+  // // NEEDS TO MATCH docker-compose.yaml CODEHASH
+  // const codehash =
+  //   "61923f6f77b607c96420d253e4eaa0764a125728cbe501a95c4477cb2a5e2351";
+  // account = getAccount(accountId);
+  // const approveRes = await account.functionCall({
+  //   contractId,
+  //   methodName: "approve_codehash",
+  //   args: {
+  //     codehash,
+  //   },
+  //   gas,
+  // });
+
+  // console.log("approveRes", approveRes);
 };
 
 deploy();
