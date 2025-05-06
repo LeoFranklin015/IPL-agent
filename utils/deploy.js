@@ -15,6 +15,10 @@ const keyPair = KeyPair.fromString(secretKey);
 keyStore.setKey(networkId, accountId, keyPair);
 keyStore.setKey(networkId, contractId, keyPair);
 
+console.log("accountId", accountId);
+console.log("contractId", contractId);
+console.log("secretKey", secretKey);
+
 const config = {
   networkId,
   keyStore,
