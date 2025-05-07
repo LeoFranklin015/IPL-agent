@@ -149,7 +149,7 @@ export class BetDistributionTool extends StructuredTool {
         }
 
         // Calculate winnings
-        const winnings = this.calculateWinnings(match, "Chennai Super Kings");
+        const winnings = this.calculateWinnings(match, matchResult.matchWinner);
 
         console.log(process.env.NEXT_PUBLIC_contractId);
         console.log(process.env.NEXT_PUBLIC_accountId);
