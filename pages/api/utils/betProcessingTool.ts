@@ -3,6 +3,7 @@ import { z } from "zod";
 import * as fs from "fs";
 import * as path from "path";
 import { matchList } from "./matchData";
+import { BetTransactionListener } from "./betTransactionListener";
 
 interface Bet {
   better_tweet_name: string;
@@ -91,6 +92,10 @@ export class BetProcessingTool extends StructuredTool {
       // Update match data
       const data = JSON.parse(fs.readFileSync(this.storagePath, "utf8"));
       const matchData = data[match.id];
+
+      // Listen for the deposit event.
+      const listener = new BetTransactionListener();
+      listener.startListening();
 
       matchData.bets.push(newBet);
       matchData.total_bet += amount;

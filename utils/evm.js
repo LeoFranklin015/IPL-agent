@@ -114,8 +114,8 @@ export const evm = {
 
     // get the signature from the NEAR contract
     const sigRes = await contractCall({
-      accountId: "swanky-chess.testnet",
-      contractId: "shade.swanky-chess.testnet",
+      accountId: process.env.NEXT_PUBLIC_accountId,
+      contractId: process.env.NEXT_PUBLIC_contractId,
       methodName: "get_signature",
       args: {
         payload: [...serializedTxHash],

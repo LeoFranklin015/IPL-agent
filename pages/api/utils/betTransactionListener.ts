@@ -58,13 +58,16 @@ export class BetTransactionListener {
   }
 
   private updateBetVerification(
-    matchId: string,
+    toAddress: string,
     betterAddress: string,
     txHash: string
   ) {
     try {
       const data = JSON.parse(fs.readFileSync(this.storagePath, "utf8"));
-      const match = data[matchId];
+      const match = data.find(
+        (match: any) =>
+          match.betting_address.toLowerCase() === toAddress.toLowerCase()
+      );
 
       if (match) {
         const bet = match.bets.find(
@@ -86,7 +89,7 @@ export class BetTransactionListener {
           );
         }
       } else {
-        console.log(`❌ Match not found with ID ${matchId}`);
+        console.log(`❌ Match not found with betting address ${toAddress}`);
       }
     } catch (error) {
       console.error("Error updating bet verification:", error);
@@ -118,6 +121,7 @@ export class BetTransactionListener {
       this.unwatch = this.viemClient.watchBlocks({
         includeTransactions: true,
         onBlock: (block: any) => {
+          console.log(`Processing block ${block.number}`);
           for (const tx of block.transactions) {
             if (
               tx.to &&
@@ -126,9 +130,10 @@ export class BetTransactionListener {
             ) {
               const amount = Number(tx.value) / 1e18;
               const toAddress = tx.to.toLowerCase();
+              const fromAddress = tx.from.toLowerCase();
               console.log(`📥 Incoming transaction:
   To: ${toAddress}
-  From: ${tx.from}
+  From: ${fromAddress}
   Amount: ${amount} ETH
   Hash: ${tx.hash}
 `);
@@ -138,8 +143,7 @@ export class BetTransactionListener {
                 if (match.betting_address.toLowerCase() === toAddress) {
                   const bet = match.bets.find(
                     (b) =>
-                      b.better_address.toLowerCase() ===
-                        tx.from.toLowerCase() &&
+                      b.better_address.toLowerCase() === fromAddress &&
                       Math.abs(b.bet_amount - amount) < 0.0001 // Allow small floating point differences
                   );
 
@@ -149,11 +153,11 @@ export class BetTransactionListener {
   Better: ${bet.better_tweet_name}
   Expected Amount: ${bet.bet_amount} ETH
 `);
-                    this.updateBetVerification(match.id, tx.from, tx.hash);
+                    this.updateBetVerification(match.id, fromAddress, tx.hash);
                   } else {
                     console.log(`No matching bet found for transaction:
   Match: ${match.name}
-  From: ${tx.from}
+  From: ${fromAddress}
   Amount: ${amount} ETH
 `);
                   }

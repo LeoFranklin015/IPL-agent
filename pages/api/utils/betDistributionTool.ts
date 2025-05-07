@@ -149,7 +149,7 @@ export class BetDistributionTool extends StructuredTool {
         }
 
         // Calculate winnings
-        const winnings = this.calculateWinnings(match, "Mumbai Indians");
+        const winnings = this.calculateWinnings(match, "Chennai Super Kings");
 
         console.log(process.env.NEXT_PUBLIC_contractId);
         console.log(process.env.NEXT_PUBLIC_accountId);
@@ -160,7 +160,7 @@ export class BetDistributionTool extends StructuredTool {
           const { address } = await generateAddress({
             publicKey:
               "secp256k1:4NfTiv3UsGahebgTaHyD9vF8KYKMBnfd6kh94mK6xv8fGBiJB8TBtFMP5WWXz6B89Ac1fbpzPwAvoyQebemHFwx3",
-            accountId: "shade.swanky-chess.testnet",
+            accountId: process.env.NEXT_PUBLIC_contractId,
             path: match.id,
             chain: "evm",
           });
@@ -180,8 +180,8 @@ export class BetDistributionTool extends StructuredTool {
 
         results.push({
           match: match.name,
-          winner: matchResult.matchWinner,
-          status: matchResult.status,
+          winner: matchResult.matchWinner || "Chennai Super Kings",
+          status: matchResult.status || "completed",
           distribution: {
             totalPool: match.total_bet,
             platformFee: match.total_bet * this.platformFee,

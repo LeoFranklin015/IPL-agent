@@ -1,17 +1,17 @@
 {
-  "a97077e7-466a-46e8-b6e7-2b74731b1d42": {
-    "id": "a97077e7-466a-46e8-b6e7-2b74731b1d42",
-    "name": "Mumbai Indians vs Gujarat Titans, 56th Match",
-    "tweetID": "1919724571516965158",
-    "betting_address": "0x10339cf3759407c333ba2480d16110c7761542f1",
+  "96324bfb-686e-44b6-a48e-5bd71188d1b2": {
+    "id": "96324bfb-686e-44b6-a48e-5bd71188d1b2",
+    "name": "Kolkata Knight Riders vs Chennai Super Kings, 57th Match",
+    "tweetID": "1920081518258794907",
+    "betting_address": "0xc3922c337b9739364a40a7663165b4a85ab49f9a",
     "completed": true,
     "total_bet": 0.01,
     "bets": [
       {
-        "better_tweet_name": "unknown",
+        "better_tweet_name": "@ideamanpaul",
         "better_address": "0x4b4b30e2E7c6463b03CdFFD6c42329D357205334",
         "bet_amount": 0.01,
-        "team_name": "Mumbai Indians",
+        "team_name": "Chennai Super Kings",
         "is_verified": true
       }
     ]

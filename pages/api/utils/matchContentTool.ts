@@ -43,12 +43,12 @@ export class MatchContentTool extends StructuredTool {
       const { address } = await generateAddress({
         publicKey:
           "secp256k1:4NfTiv3UsGahebgTaHyD9vF8KYKMBnfd6kh94mK6xv8fGBiJB8TBtFMP5WWXz6B89Ac1fbpzPwAvoyQebemHFwx3",
-        accountId: "cultured-owner.testnet",
+        accountId: process.env.NEXT_PUBLIC_contractId,
         path: nextMatch.id,
         chain: "evm",
       });
 
-      const tweetContent = `${matchName} ${teams}. Bet on your team! Tag me with your address, team choice, and ETH amount. Send to: ${address}`;
+      const tweetContent = `${matchName}. Bet on your team! Tag me with your address, team choice, and ETH amount. Send to: ${address} on Base (try to use bankrbot)`;
 
       return JSON.stringify({
         success: true,
