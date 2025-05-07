@@ -78,20 +78,20 @@ const deploy = async () => {
 
   await sleep(1000);
 
-  // // NEEDS TO MATCH docker-compose.yaml CODEHASH
-  // const codehash =
-  //   "61923f6f77b607c96420d253e4eaa0764a125728cbe501a95c4477cb2a5e2351";
-  // account = getAccount(accountId);
-  // const approveRes = await account.functionCall({
-  //   contractId,
-  //   methodName: "approve_codehash",
-  //   args: {
-  //     codehash,
-  //   },
-  //   gas,
-  // });
+  // NEEDS TO MATCH docker-compose.yaml CODEHASH
+  const codehash =
+    "61923f6f77b607c96420d253e4eaa0764a125728cbe501a95c4477cb2a5e2351";
+  account = getAccount(accountId);
+  const approveRes = await account.functionCall({
+    contractId,
+    methodName: "approve_codehash",
+    args: {
+      codehash,
+    },
+    gas,
+  });
 
-  // console.log("approveRes", approveRes);
+  console.log("approveRes", approveRes);
 };
 
 deploy();

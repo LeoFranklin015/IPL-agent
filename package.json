@@ -9,8 +9,8 @@
         "port:kill": "sudo fuser -k 3000/tcp",
         "docker:build": "sudo docker build --no-cache --target dev -t leofranklin00/shade-agent-ipl:latest .",
         "docker:run": "sudo docker run --rm -p 3000:3000 leofranklin00/shade-agent-ipl:latest",
-        "docker:image": "sudo docker build --no-cache --target prod -t leofranklin00/shade-agent-ipl:latest .",
-        "docker:push": "sudo docker push leofranklin00/shade-agent-ipl",
+        "docker:image": "sudo docker buildx build --platform linux/amd64 --no-cache --target prod -t leofranklin00/shade-agent-ipl:latest .",
+        "docker:push": "sudo docker buildx build --platform linux/amd64 --no-cache --target prod -t leofranklin00/shade-agent-ipl:latest --push .",
         "docker:prune": "sudo docker system prune",
         "docker:restart": "sudo systemctl restart docker"
     },
@@ -51,3 +51,8 @@
         "typescript": "5.8.3"
     }
 }
+
+
+
+
+
